@@ -15,6 +15,7 @@ class CreateProductsMovements extends Migration
     {
         Schema::create('products_movements', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('product_id');
             $table->bigInteger('quantity');
             $table->timestamps();
         });
