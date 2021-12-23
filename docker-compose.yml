@@ -1,0 +1,47 @@
+version: "3.7"
+services:
+  app:
+    build:
+      args:
+        user: desafio
+        uid: 1000
+      context: ./
+      dockerfile: Dockerfile
+    image: desafio
+    container_name: desafio-app
+    restart: unless-stopped
+    working_dir: /var/www/
+    volumes:
+      - ./src:/var/www
+    networks:
+      - desafio
+
+  db:
+    image: mysql:5.7
+    container_name: desafio-db
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: homestead
+      MYSQL_ROOT_PASSWORD: homestead
+      MYSQL_PASSWORD: secret
+      MYSQL_USER: homestead
+      SERVICE_TAGS: dev
+      SERVICE_NAME: mysql
+    networks:
+      - desafio
+
+  nginx:
+    image: nginx:1.17-alpine
+    container_name: desafio-nginx
+    restart: unless-stopped
+    ports:
+      - 8000:80
+    volumes:
+      - ./src:/var/www
+      - ./docker-compose/nginx:/etc/nginx/conf.d
+    networks:
+      - desafio
+
+networks:
+  desafio:
+    driver: bridge
