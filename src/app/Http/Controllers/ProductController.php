@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ProductMovementRequest;
 use App\Http\Requests\StoreProductRequest;
+use App\Http\Resources\ProductMovementResource;
 use App\Http\Resources\ProductResource;
 use App\Services\ProductService;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Response;
 
 class ProductController extends Controller
@@ -24,13 +27,27 @@ class ProductController extends Controller
      * 
      * @param StoreProductRequest $request
      * 
-     * @return Response
+     * @return JsonResponse
      */
     public function store(StoreProductRequest $request)
     {
         $product = $this->productService->save($request);
 
-
         return response()->json(new ProductResource($product), Response::HTTP_CREATED);
+    }
+
+    /**
+     * Método responsável por inserir a movimentação de um produto
+     *
+     * @param StoreProductRequest $request
+     *
+     * @return JsonResponse
+     */
+
+    public function movement(ProductMovementRequest $request)
+    {
+        $movement = $this->productService->saveMovement($request);
+
+        return response()->json(new ProductMovementResource($movement), Response::HTTP_CREATED);
     }
 }

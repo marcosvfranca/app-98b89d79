@@ -5,16 +5,16 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Product extends Model
+class ProductMovement extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'name', 'sku', 'initial_quantity'
+        'product_id', 'quantity'
     ];
 
-    public function movements()
+    public function product()
     {
-        return $this->hasMany(ProductMovement::class);
+        return $this->belongsTo(Product::class);
     }
 }

@@ -3,9 +3,8 @@
 namespace Tests\Feature;
 
 use App\Models\Product;
+use App\Models\ProductMovement;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Http\Response;
 use Tests\TestCase;
 
@@ -33,4 +32,31 @@ class ProductsTest extends TestCase
             ->assertStatus(Response::HTTP_CREATED)
             ->assertJson($data);
     }
+
+    /**
+     * A test for create product movement
+     * 
+     * @return void
+     */
+    public function testMovementProduct()
+    {
+        $movement = ProductMovement::factory()->create();
+        
+        $data = [
+            'sku' => $movement->product->sku,
+            'quantity' => random_int(-100, 100)
+        ];
+        
+        $this
+            ->postJson(
+                route('products.movement'),
+                $data
+            )
+            ->assertStatus(Response::HTTP_CREATED)
+            ->assertJsonStructure([
+                'sku', 'quantity', 'movement_date'
+            ]
+        );
+    }
+
 }
