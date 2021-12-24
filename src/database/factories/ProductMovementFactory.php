@@ -16,7 +16,7 @@ class ProductMovementFactory extends Factory
     {
         return [
             'product_id' => Product::factory(), 
-            'quantity' => $this->faker->randomDigit
+            'quantity' => $this->faker->randomDigitNot(0)
         ];
     }
 }
