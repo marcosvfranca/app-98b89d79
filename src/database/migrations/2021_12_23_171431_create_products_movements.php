@@ -13,7 +13,7 @@ class CreateProductsMovements extends Migration
      */
     public function up()
     {
-        Schema::create('products_movements', function (Blueprint $table) {
+        Schema::create('product_movements', function (Blueprint $table) {
             $table->id();
             $table->foreignId('product_id');
             $table->bigInteger('quantity');
@@ -28,6 +28,6 @@ class CreateProductsMovements extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('products_movements');
+        Schema::dropIfExists('product_movements');
     }
 }
