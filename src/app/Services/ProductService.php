@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Models\Product;
+use App\Models\ProductMovement;
 use Illuminate\Http\Request;
 
 class ProductService {
@@ -12,10 +13,25 @@ class ProductService {
      * 
      * @return Product
      */
-    public function save(Request $request) {
+    public function save(Request $request): Product {
         //Realizo a filtragem somente dos dados que devem ser persistidos no banco de dados
         $data = $request->only(['name', 'sku', 'initial_quantity']);
 
         return Product::create($data);
+    }
+
+    /**
+     * @param Request
+     * 
+     * @return ProductMovement
+     */
+    public function saveMovement(Request $request): ProductMovement {
+        $product = Product::whereSku($request->input('sku'))->first();
+
+        $movement = $product->movements()->create([
+            'quantity' => $request->input('quantity')
+        ]);
+
+        return $movement;
     }
 }
