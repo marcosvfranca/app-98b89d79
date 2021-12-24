@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Models\Product;
 use App\Models\ProductMovement;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 
 class ProductService {
@@ -13,7 +14,8 @@ class ProductService {
      * 
      * @return Product
      */
-    public function save(Request $request): Product {
+    public function save(Request $request): Product
+    {
         //Realizo a filtragem somente dos dados que devem ser persistidos no banco de dados
         $data = $request->only(['name', 'sku', 'initial_quantity']);
 
@@ -25,7 +27,8 @@ class ProductService {
      * 
      * @return ProductMovement
      */
-    public function saveMovement(Request $request): ProductMovement {
+    public function saveMovement(Request $request): ProductMovement
+    {
         $product = Product::whereSku($request->input('sku'))->first();
 
         $movement = $product->movements()->create([
@@ -33,5 +36,13 @@ class ProductService {
         ]);
 
         return $movement;
+    }
+
+    /**
+     * @return ProductMovement
+     */
+    public function listAllMovements(): Collection
+    {
+        return ProductMovement::all();
     }
 }

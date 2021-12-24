@@ -50,4 +50,16 @@ class ProductController extends Controller
 
         return response()->json(new ProductMovementResource($movement), Response::HTTP_CREATED);
     }
+
+    /**
+     * Método responsável por listar as movimentações dos produtos
+     *
+     * @return JsonResponse
+     */
+    public function list()
+    {
+        $productsMovements = $this->productService->listAllMovements();
+
+        return response()->json(ProductMovementResource::collection($productsMovements));
+    }
 }
