@@ -6,6 +6,7 @@ use App\Models\Product;
 use App\Models\ProductMovement;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class ProductService {
 
@@ -39,10 +40,19 @@ class ProductService {
     }
 
     /**
-     * @return ProductMovement
+     * @return Collection
      */
     public function listAllMovements(): Collection
     {
         return ProductMovement::all();
     }
+
+    /**
+     * @return LengthAwarePaginator
+     */
+    public function productsPaginated(): LengthAwarePaginator
+    {
+        return Product::paginate();
+    }
+    
 }

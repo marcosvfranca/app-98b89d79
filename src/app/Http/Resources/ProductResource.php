@@ -17,7 +17,8 @@ class ProductResource extends JsonResource
         return [
             'name' => $this->name,
             'sku' => $this->sku,
-            'initial_quantity' => $this->initial_quantity
+            'initial_quantity' => $this->initial_quantity,
+            'created_at' => $this->created_at
         ];
     }
 }

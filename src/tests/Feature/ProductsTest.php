@@ -77,4 +77,28 @@ class ProductsTest extends TestCase
                 ]
             ]);
     }
+    
+    /**
+     * A test for list a products paginateds
+     */
+    public function testListProducts()
+    {
+        Product::factory(50)->create();
+
+        $response = $this
+            ->getJson(route('products.index'))
+            ->assertStatus(Response::HTTP_OK)
+            ->assertJsonStructure([ 
+                'links', //verifico se existe esta chave para confirmar se a estrutura dos dados retornados é paginada
+                'meta',
+                'data' => [
+                    '*' => [
+                        'sku',
+                        'name',
+                        'initial_quantity',
+                        'created_at'
+                    ]
+                ],
+            ]);
+    }
 }

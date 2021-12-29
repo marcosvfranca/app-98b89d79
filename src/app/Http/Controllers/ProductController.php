@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ProductMovementRequest;
 use App\Http\Requests\StoreProductRequest;
+use App\Http\Resources\ProductCollection;
 use App\Http\Resources\ProductMovementResource;
 use App\Http\Resources\ProductResource;
 use App\Services\ProductService;
@@ -61,5 +62,15 @@ class ProductController extends Controller
         $productsMovements = $this->productService->listAllMovements();
 
         return response()->json(ProductMovementResource::collection($productsMovements));
+    }
+
+    /**
+     * Método responsável por listar todos os produtos cadastrados
+     */
+    public function index()
+    {
+        $products = $this->productService->productsPaginated();
+
+        return new ProductCollection($products);
     }
 }
