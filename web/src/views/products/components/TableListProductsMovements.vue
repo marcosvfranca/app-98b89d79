@@ -23,7 +23,7 @@ export default {
     AlertNoContentTable
   },
   props: {
-      movements: Array
+    movements: Array
   }
 }
 </script>

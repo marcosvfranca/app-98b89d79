@@ -27,26 +27,26 @@ export default {
     TableListProductsMovements
   },
   props: {
-      product_id: Number
+    product_id: Number
   },
   data() {
-      return {
-          movements: []
-      }
+    return {
+      movements: []
+    }
   },
   created() {
-      this.loadProductMovements()
+    this.loadProductMovements()
   },
   methods: {
-      loadProductMovements() {
-        ApiService.get('products/movement', {
-          params: {
-            product_id: this.product_id
-          }
-        }).then(({data}) => {
-              this.movements = data
-          })
-      }
+    loadProductMovements() {
+      ApiService.get('products/movement', {
+        params: {
+          product_id: this.product_id
+        }
+      }).then(({data}) => {
+        this.movements = data
+      })
+    }
   }
 }
 </script>
