@@ -53,11 +53,11 @@ npm run serve
 | POST   | http:/localhost:8000/api/products/movement | Cadastro da movimentação de produtos    |
  ----------------------------------------------------------------------------------------------- 
 ```
-## Para executar requisições em aplicativos como Insominia ou Postman, por exemplo. Informar o header:
+### Para executar requisições em aplicativos como Insominia ou Postman, por exemplo. Informar o header:
 ```
 Accept=application/json
 ```
-## Parap popular o banco de dados, com dados aleatórios, execute o seguinte comando
+### Para popular o banco de dados, com dados aleatórios, execute o seguinte comando
 ```
 docker-compose exec app php artisan db:seed
 ```
