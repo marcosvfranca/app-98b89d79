@@ -33,10 +33,10 @@
     </section>
     <footer class="modal-card-foot is-justify-content-flex-end">
       <b-button
+        type="is-primary"
         label="Salvar"
         @click="saveMovement" />
       <b-button
-        type="is-primary"
         label="Fechar"
         @click="$emit('close')" />
     </footer>
@@ -69,6 +69,7 @@ export default {
       ApiService.post('products/movement', this.form)
         .then(() => {
           this.$emit('close')
+          this.$emit('reloadProducts')
           ToastUtil.success('Produto movimentado com sucesso')
         })
         .catch((error) => {

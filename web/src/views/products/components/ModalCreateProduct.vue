@@ -45,10 +45,10 @@
     </section>
     <footer class="modal-card-foot is-justify-content-flex-end">
       <b-button
+        type="is-primary"
         label="Salvar"
         @click="saveProduct" />
       <b-button
-        type="is-primary"
         label="Fechar"
         @click="$emit('close')" />
     </footer>

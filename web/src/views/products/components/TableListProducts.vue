@@ -1,6 +1,6 @@
 <template>
   <b-table
-    v-if="products"
+    v-if="products.length"
     :data="products"
     backend-pagination
     :paginated="true"
