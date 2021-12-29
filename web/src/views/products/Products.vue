@@ -1,25 +1,25 @@
 <template>
   <section class="container">
     <div class="card">
-        <header class="card-header">
-            <div class="columns card-header-title">
-                <div class="column is-two-thirds">
-                    <span>Produtos</span>
-                </div>
-                <div class="column">
-                    <b-button type="is-primary" expanded @click="showModalCreateProduct">Cadastrar produto</b-button>
-                </div>
-                <div class="column">
-                    <b-button type="is-dark" expanded @click="showModalMovementProduct">Movimentar produto</b-button>
-                </div>
-            </div>
-        </header>
-            <section class="modal-card-body section is-main-section">
-              <TableListProducts 
-                :products="products"
-                :meta="meta"
-                @onPageChange="pageChange"/>         
-            </section>
+      <header class="card-header">
+        <div class="columns card-header-title">
+          <div class="column is-two-thirds">
+            <span>Produtos</span>
+          </div>
+          <div class="column">
+            <b-button type="is-primary" expanded @click="showModalCreateProduct">Cadastrar produto</b-button>
+          </div>
+          <div class="column">
+            <b-button type="is-dark" expanded @click="showModalMovementProduct">Movimentar produto</b-button>
+          </div>
+        </div>
+      </header>
+      <section class="modal-card-body section is-main-section">
+        <TableListProducts 
+          :products="products"
+          :meta="meta"
+          @onPageChange="pageChange"/>         
+      </section>
     </div>
   </section>
 </template>
@@ -77,8 +77,6 @@ export default {
       ).then(({ data }) => {
           this.products = data.data
           this.meta = PaginationUtil.getPaginationObject(data.meta)
-        }).catch(error => {
-          console.log(error)
         })
     }
   }
