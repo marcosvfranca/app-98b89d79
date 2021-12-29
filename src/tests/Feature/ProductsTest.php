@@ -96,6 +96,7 @@ class ProductsTest extends TestCase
                         'sku',
                         'name',
                         'initial_quantity',
+                        'current_quantity',
                         'created_at'
                     ]
                 ],

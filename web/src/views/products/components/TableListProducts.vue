@@ -27,6 +27,10 @@
       {{ props.row.initial_quantity }}
     </b-table-column>
 
+    <b-table-column field="current_quantity" label="Quantidade atual:" sortable centered v-slot="props">
+      {{ props.row.current_quantity }}
+    </b-table-column>
+
     <b-table-column field="created_at" label="Criado em:" sortable centered v-slot="props">
       <span class="tag is-success">
         {{ new Date(props.row.created_at).toLocaleDateString() }}

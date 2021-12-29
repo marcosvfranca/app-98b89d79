@@ -17,4 +17,9 @@ class Product extends Model
     {
         return $this->hasMany(ProductMovement::class);
     }
+
+    public function getCurrentQuantityAttribute()
+    {
+        return $this->initial_quantity + $this->movements->sum('quantity');
+    }
 }
