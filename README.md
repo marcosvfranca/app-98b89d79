@@ -31,7 +31,7 @@ docker-compose exec app composer test
 
 # Executando o frontend
 
-Copie o arquivo ./web/.env.example renomeando para ./src/.env.local e execute o comando a seguir
+Copie o arquivo ./web/.env.example renomeando para ./web/.env.local e execute o comando a seguir
 
 ```bash
 cd ./web/
