@@ -101,4 +101,24 @@ class ProductsTest extends TestCase
                 ],
             ]);
     }
+
+    /**
+     * A test for list a movements for product
+     */
+    public function testListProductMovements()
+    {
+        $movement = ProductMovement::factory()->create();
+        
+        $this->getJson(
+            route('products.movement.list', [
+                'product_id' => $movement->product_id
+            ]))
+            ->assertStatus(Response::HTTP_OK)
+            ->assertJsonStructure([
+                '*' => [
+                    'sku', 'quantity', 'movement_date'
+                ]
+            ])
+        ;
+    }
 }

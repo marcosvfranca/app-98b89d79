@@ -9,6 +9,7 @@ use App\Http\Resources\ProductMovementResource;
 use App\Http\Resources\ProductResource;
 use App\Services\ProductService;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
 class ProductController extends Controller
@@ -57,9 +58,9 @@ class ProductController extends Controller
      *
      * @return JsonResponse
      */
-    public function list()
+    public function list(Request $request)
     {
-        $productsMovements = $this->productService->listAllMovements();
+        $productsMovements = $this->productService->listAllMovements($request);
 
         return response()->json(ProductMovementResource::collection($productsMovements));
     }

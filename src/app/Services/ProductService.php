@@ -40,10 +40,14 @@ class ProductService {
     }
 
     /**
+     * @param Request $request
      * @return Collection
      */
-    public function listAllMovements(): Collection
+    public function listAllMovements(Request $request): Collection
     {
+        if ($request->get('product_id'))
+            return ProductMovement::whereProductId($request->get('product_id'))->get();
+
         return ProductMovement::all();
     }
 
