@@ -1,6 +1,6 @@
 <template>
   <b-table
-    v-if="movements"
+    v-if="movements.length"
     :data="movements">
     <b-table-column field="quantity" label="Quantidade movimentada" sortable v-slot="props">
       {{ props.row.quantity }}

@@ -57,7 +57,10 @@ export default {
         parent: this,
         component: ModalCreateProduct,
         hasModalCard: true,
-        trapFocus: true
+        trapFocus: true,
+        events: {
+          reloadProducts: () => this.loadProducts()
+        }
       })
     },
     showModalMovementProduct() {
