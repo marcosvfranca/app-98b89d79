@@ -80,7 +80,7 @@ export default {
     saveProduct() {
       this.errors = null
       ApiService.post('products', this.form)
-        .then(response => {
+        .then(() => {
           this.$emit('close')
           this.$emit('reloadProducts')
           ToastUtil.success('Produto cadastrado com sucesso')
