@@ -29,4 +29,24 @@ class StoreProductRequest extends FormRequest
             'initial_quantity' => ['required', 'integer']
         ];
     }
+
+    /**
+     * Validation errors messages
+     * 
+     * @return array
+     */
+    public function messages()
+    {
+        return [
+            'name.required' => 'Campo nome é obrigatório',
+            'name.string' => 'Campo nome deve ser string',
+            'name.max' => 'Campo nome deve possuir no máximo 100 caracteres',
+            'sku.required' => 'Campo SKU é obrigatório',
+            'sku.string' => 'Campo SKU deve ser string',
+            'sku.max' => 'Campo SKU deve possui no máximo 100 caracteres',
+            'initial_quantity.required' => 'Campo quantidade inicial é obrigatório',
+            'initial_quantity.integer' => 'Campo quantidade inicial deve ser um número'
+        ];
+    }
+
 }

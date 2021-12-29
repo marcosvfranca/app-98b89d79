@@ -28,4 +28,20 @@ class ProductMovementRequest extends FormRequest
             'quantity' => ['required', 'integer']
         ];
     }
+
+    /**
+     * Validation errors messages
+     * 
+     * @return array
+     */
+    public function messages()
+    {
+        return [
+            'sku.required' => 'Campo SKU é obrigatório',
+            'sku.exists' => 'SKU informado não encontrado',
+            'quantity.required' => 'Campo quantidade é obrigatório',
+            'quantity.integer' => 'Campo quantidade deve ser um número'
+        ];
+    }
+
 }
