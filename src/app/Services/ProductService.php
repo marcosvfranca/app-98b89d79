@@ -1,36 +1,47 @@
-<?php 
+<?php
 
 namespace App\Services;
 
-use App\Models\Product;
-use App\Models\ProductMovement;
-use Illuminate\Database\Eloquent\Collection;
+use App\Repositories\ProductMovementRepositoryInterface;
+use App\Repositories\ProductRepositoryInterface;
 use Illuminate\Http\Request;
-use Illuminate\Pagination\LengthAwarePaginator;
 
-class ProductService {
+interface ProductServiceInterface {
+    function save(Request $request);
+    function saveMovement(Request $request);
+    function listAllMovements(Request $request);
+    function productsPaginated();
+}
+
+class ProductService implements ProductServiceInterface {
+
+    private $productRepository;
+    private $productMovementRepository;
+
+
+    public function __construct(ProductRepositoryInterface $productRepository, ProductMovementRepositoryInterface $productMovementRepository)
+    {
+        $this->productRepository = $productRepository;
+        $this->productMovementRepository = $productMovementRepository;
+    }
 
     /**
      * @param Request $request
-     * 
-     * @return Product
      */
-    public function save(Request $request): Product
+    public function save(Request $request)
     {
         //Realizo a filtragem somente dos dados que devem ser persistidos no banco de dados
         $data = $request->only(['name', 'sku', 'initial_quantity']);
 
-        return Product::create($data);
+        return $this->productRepository->create($data);
     }
 
     /**
      * @param Request
-     * 
-     * @return ProductMovement
      */
-    public function saveMovement(Request $request): ProductMovement
+    public function saveMovement(Request $request)
     {
-        $product = Product::whereSku($request->input('sku'))->first();
+        $product = $this->productRepository->whereSku($request->input('sku'))->first();
 
         $movement = $product->movements()->create([
             'quantity' => $request->input('quantity')
@@ -41,22 +52,18 @@ class ProductService {
 
     /**
      * @param Request $request
-     * @return Collection
      */
-    public function listAllMovements(Request $request): Collection
+    public function listAllMovements(Request $request)
     {
         if ($request->get('product_id'))
-            return ProductMovement::whereProductId($request->get('product_id'))->get();
+            return $this->productMovementRepository->whereProductId($request->get('product_id'))->get();
 
-        return ProductMovement::all();
+        return $this->productMovementRepository->all();
     }
 
-    /**
-     * @return LengthAwarePaginator
-     */
-    public function productsPaginated(): LengthAwarePaginator
+    public function productsPaginated()
     {
-        return Product::paginate();
+        return $this->productRepository->paginate();
     }
-    
+
 }

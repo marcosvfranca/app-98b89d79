@@ -7,7 +7,7 @@ use App\Http\Requests\StoreProductRequest;
 use App\Http\Resources\ProductCollection;
 use App\Http\Resources\ProductMovementResource;
 use App\Http\Resources\ProductResource;
-use App\Services\ProductService;
+use App\Services\ProductServiceInterface;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -15,20 +15,20 @@ use Illuminate\Http\Response;
 class ProductController extends Controller
 {
     /**
-     * @var ProductService
+     * @var ProductServiceInterface
      */
     private $productService;
 
-    public function __construct(ProductService $productService)
+    public function __construct(ProductServiceInterface $productService)
     {
         $this->productService = $productService;
     }
 
     /**
      * Método responsável por inserir um produto no banco de dados
-     * 
+     *
      * @param StoreProductRequest $request
-     * 
+     *
      * @return JsonResponse
      */
     public function store(StoreProductRequest $request)
